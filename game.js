@@ -51,23 +51,28 @@ let lock = false;
 function clicked(event) {
     if(lock) return
     
-    console.log(event.target)
+    // console.log(event.target)
     const clickedCard = event.target;
     if(clickedCard == firstCard) return
     
+    // clickedCard.querySelector("span").classList.add('flipped')
+    clickedCard.classList.add("flipped")
     clickedCard.querySelector("span").classList.remove('hidden')
     if (!firstCard) {
         firstCard = clickedCard
-    } else if (secondCard) {
+    } else if (!secondCard) {
         secondCard = clickedCard
         isMatch();
     }
 }
 
 function isMatch() {
-    if (firstCard.dataset.value == secondCard.dataset.value) {
+    if (firstCard.innerHTML === secondCard.innerHTML) {
+        // console.log("matched");
+        
         disableCard();
     } else {
+        // console.log("not matched");
         unflip();
     }
 }
@@ -76,12 +81,26 @@ function disableCard() {
     secondCard.removeEventListener('click', clicked)
     reset();
 }
-function unflip() {
 
-}
+function unflip() {
+    lock = true;
+    setTimeout(() => {
+        // console.log("settimeout inside");
+        
+      firstCard.classList.remove("flipped");
+      firstCard.querySelector("span").classList.add("hidden");
+      secondCard.classList.remove("flipped");
+      secondCard.querySelector("span").classList.add("hidden");
+      reset();
+    }, 1000);
+  }
 
 function reset() {
     firstCard = null;
     secondCard = null;
     lock = false;
 }
+
+// document.querySelectorAll(".card").forEach((card) => {
+//     card.addEventListener("click", clicked);
+//   });

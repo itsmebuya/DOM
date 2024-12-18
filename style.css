@@ -1,10 +1,11 @@
-.container{
+.container {
     margin: auto;
     margin-top: 200px;
     display: flex;
     width: 500px;
     flex-wrap: wrap;
 }
+
 .card {
     height: 60px;
     width: 100px;
@@ -16,9 +17,21 @@
     padding-top: 40px;
     cursor: pointer;
 }
-.flipper {
+
+.flipped {
     background-color: #e0e0eb;
+    cursor: default;
 }
+
 .hidden {
     visibility: hidden;
+}
+
+.card span {
+    display: block;
+}
+
+.card.flipped span {
+    visibility: visible;
+    opacity: 1;
 }
